@@ -1,23 +1,23 @@
-import "package:chitchat/components/my_button.dart";
-import "package:chitchat/components/my_text_field.dart";
 import "package:flutter/material.dart";
+import "../components/my_button.dart";
+import "../components/my_text_field.dart";
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final void Function()? onTap;
-  const LoginPage({super.key, required this.onTap});
+  const RegisterPage({super.key, required this.onTap});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+class _RegisterPageState extends State<RegisterPage> {
 
-  void signIn(){
+  void signUp(){
 
   }
-
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final cPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,10 +37,10 @@ class _LoginPageState extends State<LoginPage> {
                   height: 100,
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 20,
                 ),
                 const Text(
-                  "Welcome back buddy you\'ve been missed!",
+                  "Happy to have you on board!",
                   style: TextStyle(fontSize: 16),
                 ),
                 const SizedBox(
@@ -60,11 +60,19 @@ class _LoginPageState extends State<LoginPage> {
                   obscureText: true,
                 ),
                 const SizedBox(
+                  height: 10,
+                ),
+                MyTextField(
+                  controller: cPasswordController,
+                  hintText: "Confirm Password",
+                  obscureText: true,
+                ),
+                const SizedBox(
                   height: 30,
                 ),
                 MyButton(
-                  onTap: signIn,
-                  text: "S I G N  I N",
+                  onTap: signUp,
+                  text: "S I G N  U P",
                 ),
                 const SizedBox(
                   height: 20,
@@ -72,19 +80,19 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Not a member? "),
+                    const Text("Already a member? "),
                     GestureDetector(
                       onTap: widget.onTap,
                       child: const Text(
-                        "Register Now",
+                        "Sign In Now",
                         style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
+                    )
                   ],
-                ),
+                )
               ],
             ),
           ),

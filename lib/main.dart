@@ -1,4 +1,6 @@
 import 'package:chitchat/pages/loginpage.dart';
+import 'package:chitchat/pages/register_page.dart';
+import 'package:chitchat/services/auth/login_or_register.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,9 +12,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: LoginOrRegister(),
     );
   }
 }
