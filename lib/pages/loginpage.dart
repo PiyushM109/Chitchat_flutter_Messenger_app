@@ -1,6 +1,8 @@
 import "package:chitchat/components/my_button.dart";
 import "package:chitchat/components/my_text_field.dart";
+import "package:chitchat/services/auth/auth_services.dart";
 import "package:flutter/material.dart";
+import "package:provider/provider.dart";
 
 class LoginPage extends StatefulWidget {
   final void Function()? onTap;
@@ -14,8 +16,23 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void signIn(){
+  void signIn() async {
+    final authService = Provider.of<AuthServices>(context, listen: false);
 
+    try {
+      await authService.signInWithEmailandPassword(
+        emailController.text,
+        passwordController.text,
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            e.toString(),
+          ),
+        ),
+      );
+    }
   }
 
   @override

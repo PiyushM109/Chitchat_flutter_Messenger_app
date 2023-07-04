@@ -15,8 +15,11 @@ class _LoginOrRegisterState extends State<LoginOrRegister> {
   bool showLoginPage = true;
 
   void togglepages(){
+  setState(() {
     showLoginPage = !showLoginPage;
-  }
+  });
+}
+
   @override
   Widget build(BuildContext context) {
     if(showLoginPage){
