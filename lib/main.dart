@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:chitchat/firebase_options.dart';
 import 'package:chitchat/services/auth/auth_gate.dart';
 import 'package:chitchat/services/auth/auth_services.dart';

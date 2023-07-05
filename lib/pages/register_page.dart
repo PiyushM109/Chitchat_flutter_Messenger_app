@@ -1,4 +1,7 @@
+import "package:chitchat/services/auth/auth_services.dart";
+import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
+import "package:provider/provider.dart";
 import "../components/my_button.dart";
 import "../components/my_text_field.dart";
 
@@ -11,10 +14,32 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  void signUp() async {
+    if (passwordController.text != cPasswordController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Password don't match"),
+        ),
+      );
+      return;
+    }
 
-  void signUp(){
+    final authService = Provider.of<AuthServices>(context, listen: false);
 
+    try {
+      await authService.signUpWithEmailandPassword(
+        emailController.text,
+        passwordController.text,
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(error.toString()),
+        ),
+      );
+    }
   }
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final cPasswordController = TextEditingController();
