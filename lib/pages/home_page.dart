@@ -25,7 +25,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home Page"),
+        centerTitle: true, 
+        title: const Text("C H I T C H A T"),
+        backgroundColor: Colors.grey,
         actions: [
           IconButton(
             onPressed: signOut,
@@ -60,19 +62,27 @@ class _HomePageState extends State<HomePage> {
     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
 
     if (_auth.currentUser!.email?.toLowerCase() != data['email'].toLowerCase()) {
-      return ListTile(
-        title: Text(data['email']),
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ChatPage(
-                receiveruserEmail: data['email'],
-                receiverUserID: data['uid'],
-              ),
-            ),
-          );
-        },
+      return Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: Colors.grey[300]),
+          child: ListTile(
+            title: Text(data['email']),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChatPage(
+                    receiveruserEmail: data['email'],
+                    receiverUserID: data['uid'],
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
       );
     } else {
       return Container();

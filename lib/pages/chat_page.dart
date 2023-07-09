@@ -22,6 +22,13 @@ class _ChatPageState extends State<ChatPage> {
   final ChatService _chatService = ChatService();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
+  String getUsername(String user) {
+    String email = user;
+    List<String> parts = email.split('@');
+    String username = parts[0];
+    return username;
+  }
+
   void sendMessage() async {
     if (_messageController.text.isNotEmpty) {
       await _chatService.sendMessage(
@@ -34,15 +41,21 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.receiveruserEmail),
+        centerTitle: true,
+        title: Text(getUsername(widget.receiveruserEmail)),
+        backgroundColor: Colors.grey,
       ),
-      body: Column(
+      backgroundColor:Colors.grey[300],
+      body: 
+      Column(
         children: [
           Expanded(
             child: _buildMessageList(),
           ),
           _buildMessageInput(),
-          SizedBox(height: 20,)
+          const SizedBox(
+            height: 20,
+          )
         ],
       ),
     );
@@ -91,7 +104,13 @@ class _ChatPageState extends State<ChatPage> {
                     ? MainAxisAlignment.end
                     : MainAxisAlignment.start,
             children: [
-              Text(data['senderEmail']),
+              Text(
+                getUsername(data['senderEmail']),
+                style: TextStyle(color: Colors.grey[900]),
+              ),
+              const SizedBox(
+                height: 2,
+              ),
               ChatBubble(message: data['message'])
             ]),
       ),
@@ -101,7 +120,7 @@ class _ChatPageState extends State<ChatPage> {
   //build message input
   Widget _buildMessageInput() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal:10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Row(
         children: [
           Expanded(
